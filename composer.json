@@ -1,0 +1,19 @@
+{
+    "name": "mrssoft/yii2-abtest",
+    "version": "1.0.0",
+    "description": "Component for A/B test",
+    "authors": [
+        {
+            "name": "Melnikov Ruslan",
+            "email": "mrs2000@inbox.ru"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "mrssoft\\abtest\\": ""
+        }
+    }
+}
