@@ -7,7 +7,6 @@ CREATE TABLE `abtest` (
     `title` VARCHAR(256) NULL DEFAULT NULL,
     `name` VARCHAR(32) NULL DEFAULT NULL,
     `variants` TINYINT(1) NULL DEFAULT '2',
-    `current` TINYINT(1) NULL DEFAULT '0',
     `public` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
     `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
@@ -30,7 +29,7 @@ class ABTest extends \yii\db\ActiveRecord
         return [
             [['title', 'name'], 'required'],
             [['title', 'name'], 'filter', 'filter' => 'trim'],
-            [['variants', 'current', 'public'], 'integer'],
+            [['variants', 'public'], 'integer'],
             [
                 'name',
                 'match',

@@ -110,16 +110,11 @@ class ABTesting extends Component
             $variant = $this->getVariant($testName);
             if ($variant === null) {
                 $test = $this->findTest($testName);
-                if (empty($test)) {
-                    $variant = 1;
-                    $this->setVariant($testName, $variant);
+                if ($test === null) {
+                    return false;
                 } else {
-                    $variant = $test['current'] + 1;
-                    if ($variant > $test['variants']) {
-                        $variant = 1;
-                    }
+                    $variant = mt_rand(1, $test['variants']);
                     $this->setVariant($testName, $variant);
-                    $this->updateTest($testName, $variant);
                 }
             }
 
@@ -184,10 +179,10 @@ class ABTesting extends Component
      */
     private function findTest($testName)
     {
-        return (new Query())->select('variants, current')
-                             ->from($this->tableName)
-                             ->where('public=1 AND name=:name', [':name' => $testName])
-                             ->one();
+        return (new Query())->select('variants')
+                            ->from($this->tableName)
+                            ->where('public=1 AND name=:name', [':name' => $testName])
+                            ->one();
     }
 
     /**
@@ -199,19 +194,5 @@ class ABTesting extends Component
                             ->from($this->tableName)
                             ->where(['public' => 1])
                             ->all();
-    }
-
-    /**
-     * Update test current variant
-     * @param string $testName
-     * @param int $variant
-     */
-    private function updateTest($testName, $variant)
-    {
-        Yii::$app->db->createCommand()->update(
-            $this->tableName,
-            ['current' => $variant],
-            ['name' => $testName]
-        )->execute();
     }
 }

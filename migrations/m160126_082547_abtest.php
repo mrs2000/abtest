@@ -15,7 +15,6 @@ class m160126_082547_abtest extends Migration
             'name' => 'VARCHAR(32) NOT NULL',
             'title' => 'VARCHAR(256) NOT NULL',
             'variants' => 'TINYINT(1) UNSIGNED NOT NULL DEFAULT 2',
-            'current' => 'TINYINT(1) UNSIGNED NOT NULL DEFAULT 0',
             'date' => 'TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP',
             'public' => 'TINYINT(1) NOT NULL DEFAULT 1',
             'PRIMARY KEY (`id`)',
