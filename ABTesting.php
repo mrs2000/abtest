@@ -110,7 +110,7 @@ class ABTesting extends Component
             $variant = $this->getVariant($testName);
             if ($variant === null) {
                 $test = $this->findTest($testName);
-                if ($test === null) {
+                if (empty($test)) {
                     return false;
                 } else {
                     $variant = mt_rand(1, $test['variants']);
